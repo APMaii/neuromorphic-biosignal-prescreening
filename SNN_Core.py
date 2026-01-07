@@ -98,8 +98,8 @@ except OSError:
         mpl.rcParams['axes.grid'] = True
         mpl.rcParams['grid.alpha'] = 0.3
 
-mpl.rcParams['figure.dpi'] = 600
-mpl.rcParams['savefig.dpi'] = 600
+#mpl.rcParams['figure.dpi'] = 600
+#mpl.rcParams['savefig.dpi'] = 600
 mpl.rcParams['font.size'] = 10
 mpl.rcParams['axes.labelsize'] = 11
 mpl.rcParams['axes.titlesize'] = 12
@@ -301,12 +301,12 @@ class CancerNet_3layer(nn.Module):
 
 class SNN_BioMarker:
     
-    def __init__(self,path):
+    def __init__(self,path,dpi=600):
         self.path = path
-        if 'csv' in path.lower():
+        if path.lower().endswith('.csv'):
             self.df = pd.read_csv(path)
             
-        elif path.lower() in ['xlsx','xls']:
+        elif path.lower().endswith(('.xlsx', '.xls')):
             self.df = pd.read_excel(path)
             
         else:
@@ -352,6 +352,9 @@ class SNN_BioMarker:
         self.create_optimizer_complete = False
         self.training_loop_complete = False
         self.final_evaluation_complete = False
+
+        mpl.rcParams['figure.dpi'] = dpi
+        mpl.rcParams['savefig.dpi'] = dpi
 
         print("Dataset loaded:")
         print(f"Columns: {self.df.columns.tolist()}")
