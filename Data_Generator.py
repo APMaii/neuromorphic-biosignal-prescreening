@@ -14,8 +14,6 @@ What it does:
 4. Prepares data: Organizes all data into a structured DataFrame and exports to CSV
    for further analysis or machine learning applications
 '''
-
-
 #import libraries
 import numpy as np
 import pandas as pd
@@ -39,7 +37,6 @@ def freq_from_conc(conc_nM):
 
 data = []
 sample_id = 1
-
 def add_samples_by_ratio(ratio_min, ratio_max, label, n):
     """
     Generate samples with Free PSA / Total PSA ratio in specified range.
