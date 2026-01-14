@@ -16,7 +16,6 @@ Also after running the SNN trainin , you can save the model and load it later fo
 
 #import the SNN_BioMarker class
 from SNN_Core import SNN_BioMarker
-
 # Ask the user to enter the path to the CSV file
 path = input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv): ')
 
@@ -24,10 +23,16 @@ path = input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv): ')
 SNN_BioMarker_full_pipeline = SNN_BioMarker(path,dpi=600)
 
 # Run the full pipeline
-
-SNN_BioMarker_full_pipeline.run_full_pipeline(dt = 1e-2 , T = 5,a = 0.5,target_length=25,downsampled_signals=False,
-split_ratio=0.8,batch_size=8,num_epochs=210,num_layers=3,num_hidden1=40,num_hidden2=20,num_hidden3=8,
-beta=0.9,correct_rate=0.8,incorrect_rate=0.2,lr=1e-3,betas=(0.9, 0.999),generation_method='5',save_model=True,model_name='SNN_3_LAYER')
+SNN_BioMarker_full_pipeline.run_full_pipeline(dt = 1e-2 , T = 5,a = 0.5,target_length=25,
+                                              downsampled_signals=False,
+                                              split_ratio=0.8,batch_size=8,
+                                              num_epochs=210,num_layers=3,
+                                              num_hidden1=40,num_hidden2=20,
+                                              num_hidden3=8,beta=0.9,
+                                              correct_rate=0.8,incorrect_rate=0.2,
+                                              lr=1e-3,betas=(0.9, 0.999),
+                                              generation_method='5',save_model=True,
+                                              model_name='SNN_3_LAYER')
 
 SNN_BioMarker_full_pipeline.visualize_signal_flow2(sample_idx=108)
 
@@ -127,20 +132,4 @@ SNN_BioMarker_load_model.plot_loss_curves()
 SNN_BioMarker_load_model.plot_confusion_matrix()
 SNN_BioMarker_load_model.test_single_prediction()
 SNN_BioMarker_load_model.visualize_signal_flow2(sample_idx=9)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
