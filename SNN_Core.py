@@ -1,7 +1,6 @@
 #============================================================
 # IMPORTING LIBRARIES
 #============================================================
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -22,11 +21,16 @@ from scipy import signal
 import matplotlib as mpl
 import random
 
+
+
+
 # ============================================================
 # REPRODUCIBILITY SETTINGS
 # ============================================================
 # Set random seeds for reproducibility
 REPRODUCIBILITY_SEED = 42
+
+
 
 def set_seed(seed=REPRODUCIBILITY_SEED):
     """
@@ -58,6 +62,9 @@ def set_seed(seed=REPRODUCIBILITY_SEED):
 
 # Set seed globally at module import
 set_seed(REPRODUCIBILITY_SEED)
+
+
+
 
 # ============================================================
 # PROFESSIONAL COLOR PALETTE
@@ -103,6 +110,13 @@ except OSError:
 mpl.rcParams['font.size'] = 10
 mpl.rcParams['axes.labelsize'] = 11
 mpl.rcParams['axes.titlesize'] = 12
+
+
+
+
+# ============================================================
+# UTILS CLASSES
+# ============================================================
 
 # Create dataset class
 class SpikeDataset(Dataset):
@@ -298,6 +312,13 @@ class CancerNet_3layer(nn.Module):
         return torch.stack(spk4_rec), torch.stack(mem4_rec)
 
 
+
+
+
+
+# ============================================================
+# CORE CLASS
+# ============================================================
 
 class SNN_BioMarker:
     
