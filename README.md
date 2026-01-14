@@ -5,7 +5,7 @@ This project implements a Spiking Neural Network (SNN) based system for analyzin
 
 ![System Schematic](figures/Schematic.png)
 
-*Schematic diagram of the neuromorphic biosignal prescreening system (from "An Energy-Efficient Neuromorphic Front-End for Risk Pre-Screening Using Pulse-Encoded Biosensor Signals")*
+*Schematic diagram of the neuromorphic biosignal prescreening system (from "A Neuromorphic Front-End based on Memristive Biosensors for Risk Pre-Screening by Pulse-Encoded Signals")*
 
 
 ### Workflow
@@ -336,20 +336,13 @@ Copyright (c) 2026 Ali Pilehvar Meibody
 ## Citation
 
 If you use this code in your research, please cite the associated publication:
-
 ```bibtex
-@article{pilehvar_meibody_2026,
-  title={An Energy-Efficient Neuromorphic Front-End for Risk Pre-Screening Using Pulse-Encoded Biosensor Signals},
-  author={Pilehvar Meibody, Ali},
-  journal={Your Journal},
-  year={2026}
-}
+Not Published Yet
 ```
 
 ## Contact
-
 For questions or issues, please open an issue on the repository or contact the author.
+Ali.Pilehvarmeibody@epfl.ch
 
-## Acknowledgments
 
-This work is part of a Master's thesis project on neuromorphic computing for biosignal processing.
+
