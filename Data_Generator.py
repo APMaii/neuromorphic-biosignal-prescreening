@@ -14,6 +14,7 @@ What it does:
 4. Prepares data: Organizes all data into a structured DataFrame and exports to CSV
    for further analysis or machine learning applications
 '''
+
 #import libraries
 import numpy as np
 import pandas as pd
