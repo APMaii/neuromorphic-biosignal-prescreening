@@ -26,6 +26,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+
+
 # Set professional style parameters
 try:
     plt.style.use('seaborn-v0_8-whitegrid')
@@ -45,6 +47,9 @@ mpl.rcParams['xtick.labelsize'] = 9
 mpl.rcParams['ytick.labelsize'] = 9
 mpl.rcParams['legend.fontsize'] = 9
 mpl.rcParams['figure.titlesize'] = 14
+
+
+
 
 # Professional color palette - sophisticated and cohesive
 # Risk levels: High Risk -> Low Risk (muted, professional, academic colors)
@@ -72,9 +77,6 @@ REF_LINE_COLORS = {
 # Ask the user to enter the path to the CSV file
 path =input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv):')
 df = pd.read_csv(path)
-
-
-
 
 
 # =========================
@@ -149,6 +151,10 @@ plt.tight_layout()
 plt.show()
 
 
+
+
+
+
 # =========================
 # 2. Free PSA vs Total PSA (Frequency)
 # =========================
@@ -174,6 +180,10 @@ plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
 plt.show()
+
+
+
+
 
 # =========================
 # 3. Histograms (Concentration and Frequency)
@@ -222,6 +232,9 @@ plt.tight_layout()
 plt.show()
 
 
+
+
+
 # =========================
 # 4. Log–log law validation
 # =========================
@@ -253,6 +266,10 @@ plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
 plt.show()
+
+
+
+
 
 # =========================
 # 5. Risk Level Distribution Analysis (4 subplots)
