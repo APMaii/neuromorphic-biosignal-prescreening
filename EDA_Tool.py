@@ -5,14 +5,19 @@ This script performs exploratory data analysis (EDA) on the PSA biomarker datase
 What it does:
 1. Loads data: Reads the generated PSA dataset from CSV containing concentrations,
    frequencies, ratios, and risk level classifications
+   
 2. Visualizes concentration space: Creates scatter plots showing Free PSA vs Total PSA
    in concentration space, with risk level color-coding and ratio boundary lines
+   
 3. Visualizes frequency space: Displays the relationship between Free and Total PSA
    in the frequency domain (converted from concentrations)
+   
 4. Analyzes distributions: Generates histograms for concentrations, frequencies, and
    Free/Total PSA ratios to understand data distributions
+   
 5. Validates conversion formula: Creates log-log plots to verify the concentration-to-frequency
    conversion relationship follows the expected power law
+   
 6. Risk level analysis: Produces comprehensive multi-panel visualizations including:
    - Sample counts per risk level
    - Ratio distributions by risk level (box plots)
