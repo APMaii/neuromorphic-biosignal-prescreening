@@ -100,6 +100,9 @@ def add_samples_by_ratio(ratio_min, ratio_max, label, n):
                 count += 1
 
 
+
+
+
 # Generate samples for each risk level based on Free/Total PSA ratio
 # Risk levels:
 # - High Risk: ratio < 10%
@@ -141,4 +144,5 @@ print(df["Risk_Level"].value_counts())
 
 
 # Export the DataFrame to a CSV file
+#** You can Customize the name of your file
 df.to_csv("Free_Total_PSA_frequency.csv", index=False, float_format="%.14f")
