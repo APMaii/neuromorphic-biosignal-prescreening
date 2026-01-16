@@ -1,18 +1,24 @@
 '''
 This script generates synthetic PSA (Prostate-Specific Antigen) biomarker data.
 
+
+
 What it does:
 1. Generates concentrations: Creates Free PSA and Total PSA concentration values (in nM)
    within a specified range, ensuring Free PSA < Total PSA
+   
 2. Converts to frequency: Transforms concentration values to frequency measurements (Hz)
    using the conversion formula: frequency = (10^6.63) * (concentration_M^0.6)
+   
 3. Categorizes risk levels: Assigns risk levels based on Free/Total PSA ratio:
    - High Risk: ratio < 10%
    - Moderately High Risk: ratio 10-15%
    - Intermediate: ratio 15-25%
    - Low Risk: ratio > 25%
+   
 4. Prepares data: Organizes all data into a structured DataFrame and exports to CSV
    for further analysis or machine learning applications
+   
 '''
 
 #import libraries
