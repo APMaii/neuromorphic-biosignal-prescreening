@@ -1,4 +1,3 @@
-
 '''
 This script performs exploratory data analysis (EDA) on the PSA biomarker dataset.
 
@@ -28,11 +27,13 @@ publication and academic presentations.
 '''
 
 
+
 #import libraries
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+
 
 
 # Set professional style parameters
@@ -84,6 +85,8 @@ REF_LINE_COLORS = {
 # Ask the user to enter the path to the CSV file
 path =input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv):')
 df = pd.read_csv(path)
+
+
 
 
 # =========================
@@ -162,6 +165,8 @@ plt.show()
 
 
 
+
+
 # =========================
 # 2. Free PSA vs Total PSA (Frequency)
 # =========================
@@ -187,6 +192,8 @@ plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
 plt.show()
+
+
 
 
 
@@ -242,6 +249,8 @@ plt.show()
 
 
 
+
+
 # =========================
 # 4. Log–log law validation
 # =========================
@@ -273,6 +282,8 @@ plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
 plt.show()
+
+
 
 
 
