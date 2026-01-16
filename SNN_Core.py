@@ -28,8 +28,6 @@ import random
 # Set random seeds for reproducibility
 REPRODUCIBILITY_SEED = 42
 
-
-
 def set_seed(seed=REPRODUCIBILITY_SEED):
     """
     Set random seeds for reproducibility across all libraries.
@@ -115,7 +113,6 @@ mpl.rcParams['axes.titlesize'] = 12
 # ============================================================
 # UTILS CLASSES
 # ============================================================
-
 # Create dataset class
 class SpikeDataset(Dataset):
     def __init__(self, data, labels):
@@ -177,8 +174,6 @@ class CancerNet_1layer(nn.Module):
             spk2_rec.append(spk2)
             mem2_rec.append(mem2)
             
-
-        
         return torch.stack(spk2_rec), torch.stack(mem2_rec)
 
 
@@ -236,9 +231,7 @@ class CancerNet_2layer(nn.Module):
             
             spk3_rec.append(spk3)
             mem3_rec.append(mem3)
-            
 
-        
         return torch.stack(spk3_rec), torch.stack(mem3_rec)
 
 
@@ -304,9 +297,7 @@ class CancerNet_3layer(nn.Module):
             
             spk4_rec.append(spk4)
             mem4_rec.append(mem4)
-            
 
-        
         return torch.stack(spk4_rec), torch.stack(mem4_rec)
 
 
@@ -317,7 +308,6 @@ class CancerNet_3layer(nn.Module):
 # ============================================================
 # CORE CLASS
 # ============================================================
-
 class SNN_BioMarker:
     
     def __init__(self,path,dpi=600):
