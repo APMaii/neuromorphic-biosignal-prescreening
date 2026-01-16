@@ -7,7 +7,6 @@ This project implements a Spiking Neural Network (SNN) based system for analyzin
 
 *Schematic diagram of the neuromorphic biosignal prescreening system (from "A Neuromorphic Front-End based on Memristive Biosensors for Risk Pre-Screening by Pulse-Encoded Signals")*
 
-
 ### Workflow
 
 The complete workflow consists of the following stages:
