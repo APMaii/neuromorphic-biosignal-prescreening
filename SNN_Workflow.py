@@ -2,8 +2,10 @@
 Example workflow for running the SNN model on the PSA biomarker dataset.
 
 you can go for two options:
-1- Run the full pipeline
-2- Run manually Each steps
+
+  1- Run the full pipeline
+  
+  2- Run manually Each steps
 
 
 Also after running the SNN trainin , you can save the model and load it later for testing or further analysis.
