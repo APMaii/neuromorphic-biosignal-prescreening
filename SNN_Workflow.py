@@ -12,10 +12,11 @@ Also after running the SNN trainin , you can save the model and load it later fo
 
 '''
 
+
+
 #============================================================
 '''          1- Run the full pipeline                     '''
 #============================================================
-
 #import the SNN_BioMarker class
 from SNN_Core import SNN_BioMarker
 # Ask the user to enter the path to the CSV file
@@ -98,11 +99,6 @@ SNN_BioMarker_manual.visualize_signal_flow2(sample_idx=108)
 
 # Save model
 SNN_BioMarker_manual.save_model(model_name='SNN_3_LAYER')
-
-
-
-
-
 
 
 #============================================================
