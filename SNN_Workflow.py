@@ -9,7 +9,6 @@ you can go for two options:
 
 
 Also after running the SNN trainin , you can save the model and load it later for testing or further analysis.
-
 '''
 
 
