@@ -1,8 +1,6 @@
 '''
 This script generates synthetic PSA (Prostate-Specific Antigen) biomarker data.
 
-
-
 What it does:
 1. Generates concentrations: Creates Free PSA and Total PSA concentration values (in nM)
    within a specified range, ensuring Free PSA < Total PSA
