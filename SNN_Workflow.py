@@ -109,12 +109,15 @@ from SNN_Core import SNN_BioMarker
 # Ask the user to enter the path to the CSV file
 data_path = input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv): ')
 
+
 # Create an instance of the SNN_BioMarker class
 SNN_BioMarker_load_model = SNN_BioMarker(data_path,dpi=600)
 
 
 model_path = input('Enter the path to the model (.pth): ')
-SNN_BioMarker_load_model.load_model(model_path)
+
+
+SNN_BioMarker_load_model.load_model(model_path,auto_prepare=True,generation_method='5',split_ratio=0.8,batch_size=8)
 
 
 '''
@@ -128,5 +131,5 @@ Then you can run the following steps:
 SNN_BioMarker_load_model.plot_loss_curves()
 SNN_BioMarker_load_model.plot_confusion_matrix()
 SNN_BioMarker_load_model.test_single_prediction()
-SNN_BioMarker_load_model.visualize_signal_flow2(sample_idx=9)
+SNN_BioMarker_load_model.visualize_signal_flow2(sample_idx=108)
 
