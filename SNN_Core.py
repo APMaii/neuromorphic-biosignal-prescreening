@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 from scipy import signal
 import matplotlib as mpl
 import random
+import os
 
 
 # ============================================================
@@ -908,7 +909,8 @@ class SNN_BioMarker:
 
         fig.suptitle(
             "Example Synaptic Input Signals Generated from Biomarker Spiking Frequencies",
-            fontsize=14
+            fontsize=18,
+            fontweight='bold'
         )
 
         # Professional colors
@@ -918,11 +920,12 @@ class SNN_BioMarker:
         for i, idx in enumerate(sample_indices):
             axes[i].plot(time, self.X_fPSA[idx], color=fpsa_color, label="fPSA", linewidth=1.5, alpha=0.8)
             axes[i].plot(time, self.X_tPSA[idx], color=tpsa_color, label="tPSA", linewidth=1.5, alpha=0.8)
-            axes[i].set_ylabel(f"Sample {idx}")
+            axes[i].set_ylabel(f"Sample {idx}", fontsize=14, fontweight='bold')
+            axes[i].tick_params(axis='both', which='major', labelsize=13, width=1.4, length=5)
             if i == 0:
-                axes[i].legend(loc="upper right")
+                axes[i].legend(loc="upper right", fontsize=14, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 
-        axes[-1].set_xlabel("Time (s)")
+        axes[-1].set_xlabel("Time (s)", fontsize=16, fontweight='bold')
 
         plt.tight_layout(rect=[0, 0, 1, 0.95])
         plt.show()
@@ -1504,17 +1507,18 @@ class SNN_BioMarker:
         if not self.training_loop_complete:
             raise ValueError("Training loop not completed yet. Please call training_loop() first.")
 
-        fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+        fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
         # Plot loss curves
         axes[0].plot(self.loss_hist, label='Train Loss', linewidth=2, 
                     color=PROF_COLORS['train'], alpha=0.8)
         axes[0].plot(self.test_loss_hist, label='Test Loss', linewidth=2, 
                     color=PROF_COLORS['test'], alpha=0.8)
-        axes[0].set_xlabel('Epoch', fontsize=12, fontweight='medium')
-        axes[0].set_ylabel('Loss', fontsize=12, fontweight='medium')
-        axes[0].set_title('Training and Test Loss', fontsize=14, fontweight='bold')
-        axes[0].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+        axes[0].set_xlabel('Epoch', fontsize=18, fontweight='bold')
+        axes[0].set_ylabel('Loss', fontsize=18, fontweight='bold')
+        axes[0].set_title('Training and Test Loss', fontsize=20, fontweight='bold')
+        axes[0].tick_params(axis='both', which='major', labelsize=15, width=1.5, length=6)
+        axes[0].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
         axes[0].grid(True, alpha=0.3, linestyle='--')
 
         # Plot accuracy curves
@@ -1528,11 +1532,12 @@ class SNN_BioMarker:
         axes[1].plot(epochs_recorded[:len(self.test_acc_hist)], self.test_acc_hist, 
                     marker='s', label='Test Accuracy', linewidth=2, 
                     color=PROF_COLORS['test'], alpha=0.8, markersize=5)
-        axes[1].set_xlabel('Epoch', fontsize=12)
-        axes[1].set_ylabel('Accuracy (%)', fontsize=12)
-        axes[1].set_title('Training and Test Accuracy', fontsize=14, fontweight='bold')
-        axes[1].legend()
-        axes[1].grid(True, alpha=0.3)
+        axes[1].set_xlabel('Epoch', fontsize=18, fontweight='bold')
+        axes[1].set_ylabel('Accuracy (%)', fontsize=18, fontweight='bold')
+        axes[1].set_title('Training and Test Accuracy', fontsize=20, fontweight='bold')
+        axes[1].tick_params(axis='both', which='major', labelsize=15, width=1.5, length=6)
+        axes[1].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
+        axes[1].grid(True, alpha=0.3, linestyle='--')
 
         plt.tight_layout()
         plt.show()
@@ -1583,7 +1588,7 @@ class SNN_BioMarker:
 
         # Class names
        # class_names = ['Low', 'Intermediate', 'Intermediate-High', 'High', 'Very High']
-        class_names = ['Low Risk', 'Intermediate Risk', 'Moderately High Risk', 'High Risk']
+        class_names = ['Low', 'Intermediate', 'Moderately High', 'High']
 
         # Visualize confusion matrices
         fig, axes = plt.subplots(1, 2, figsize=(16, 6))
@@ -1593,22 +1598,26 @@ class SNN_BioMarker:
                     xticklabels=class_names, yticklabels=class_names,annot_kws={"size": 18, "weight": "bold"},
                     ax=axes[0], cbar_kws={'label': 'Count'}, 
                     linewidths=0.5, linecolor='white')
-        axes[0].set_xlabel('Predicted Label', fontsize=12, fontweight='bold')
-        axes[0].set_ylabel('True Label', fontsize=12, fontweight='bold')
+        axes[0].set_xlabel('Predicted Label', fontsize=16, fontweight='bold')
+        axes[0].set_ylabel('True Label', fontsize=14, fontweight='bold')
         axes[0].set_title(f'Train Set Confusion Matrix\nAccuracy: {self.final_train_acc:.2f}%', 
-                        fontsize=13, fontweight='bold')
-        axes[0].tick_params(axis='both', labelsize=10)
+                        fontsize=17, fontweight='bold')
+        axes[0].tick_params(axis='both', labelsize=13)
+        axes[0].set_xticklabels(class_names, rotation=0, ha='center', fontsize=13, fontweight='bold')
+        axes[0].set_yticklabels(class_names, rotation=90, va='center', fontsize=11, fontweight='bold')
 
         # Test confusion matrix
         sns.heatmap(cm_test, annot=True, fmt='d', cmap=CMAP_TEST, 
                     xticklabels=class_names, yticklabels=class_names,annot_kws={"size": 18, "weight": "bold"},
                     ax=axes[1], cbar_kws={'label': 'Count'}, 
                     linewidths=0.5, linecolor='white')
-        axes[1].set_xlabel('Predicted Label', fontsize=12, fontweight='bold')
-        axes[1].set_ylabel('True Label', fontsize=12, fontweight='bold')
+        axes[1].set_xlabel('Predicted Label', fontsize=16, fontweight='bold')
+        axes[1].set_ylabel('True Label', fontsize=14, fontweight='bold')
         axes[1].set_title(f'Test Set Confusion Matrix\nAccuracy: {self.final_test_acc:.2f}%', 
-                        fontsize=13, fontweight='bold')
-        axes[1].tick_params(axis='both', labelsize=10)
+                        fontsize=17, fontweight='bold')
+        axes[1].tick_params(axis='both', labelsize=13)
+        axes[1].set_xticklabels(class_names, rotation=0, ha='center', fontsize=13, fontweight='bold')
+        axes[1].set_yticklabels(class_names, rotation=90, va='center', fontsize=11, fontweight='bold')
 
         plt.tight_layout()
         plt.show()
@@ -2020,6 +2029,15 @@ class SNN_BioMarker:
         """
         if not self.final_evaluation_complete:
             raise ValueError("Network must be trained first. Please complete training and final_evaluation() first.")
+
+        base_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in globals() else os.getcwd()
+        figures_dir = os.path.join(base_dir, "Signal_Flow_Figures")
+        os.makedirs(figures_dir, exist_ok=True)
+
+        def _save_flow_figure(fig_obj, filename):
+            save_path = os.path.join(figures_dir, filename)
+            fig_obj.savefig(save_path, dpi=600, bbox_inches='tight')
+            print(f"Figure saved: {save_path}")
         
         # Select sample (same logic as visualize_signal_flow)
         if sample_idx is None:
@@ -2173,22 +2191,25 @@ class SNN_BioMarker:
         ax = axes1[0]
         ax.plot(time, input_fpsa, color=PROF_COLORS['fpsa'], linewidth=2, 
                label=f'fPSA Signal (freq: {f1:.4f} Hz)', alpha=0.8)
-        ax.set_ylabel('fPSA Signal\nAmplitude', fontsize=11, fontweight='bold')
-        ax.set_title('fPSA Input Neuron', fontsize=12, fontweight='bold')
-        ax.legend(loc='upper right', frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+        ax.set_ylabel('fPSA Signal\nAmplitude', fontsize=14, fontweight='bold')
+        ax.set_title('fPSA Input', fontsize=16, fontweight='bold')
+        ax.tick_params(axis='both', which='major', labelsize=14, width=1.3, length=5)
+        ax.legend(loc='upper right', fontsize=12, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
         ax.grid(True, alpha=0.3, linestyle='--')
         
         # tPSA Input
         ax = axes1[1]
         ax.plot(time, input_tpsa, color=PROF_COLORS['tpsa'], linewidth=2, 
                label=f'tPSA Signal (freq: {f2:.4f} Hz)', alpha=0.8)
-        ax.set_ylabel('tPSA Signal\nAmplitude', fontsize=11, fontweight='bold')
-        ax.set_xlabel('Time (seconds)', fontsize=11, fontweight='bold')
-        ax.set_title('tPSA Input Neuron', fontsize=12, fontweight='bold')
-        ax.legend(loc='upper right', frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+        ax.set_ylabel('tPSA Signal\nAmplitude', fontsize=14, fontweight='bold')
+        ax.set_xlabel('Time (seconds)', fontsize=14, fontweight='bold')
+        ax.set_title('tPSA Input', fontsize=16, fontweight='bold')
+        ax.tick_params(axis='both', which='major', labelsize=14, width=1.3, length=5)
+        ax.legend(loc='upper right', fontsize=12, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
         ax.grid(True, alpha=0.3, linestyle='--')
         
         plt.tight_layout()
+        _save_flow_figure(fig1, f"signal_flow_input_sample_{original_sample_idx}.png")
         plt.show()
         
         # ========== FIGURE 2: HIDDEN LAYER 1 NEURONS ==========
@@ -2213,24 +2234,27 @@ class SNN_BioMarker:
                 ax = axes[i, 0]
                 ax.plot(time, hidden1_mem[:, neuron_idx], color=PROF_COLORS['hidden1'], 
                        linewidth=1.5, alpha=0.8)
-                ax.set_ylabel(f'Neuron {neuron_idx}\nMembrane Pot.', fontsize=10, fontweight='bold')
+                ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
                 if i == num_neurons_this_fig - 1:
-                    ax.set_xlabel('Time (seconds)', fontsize=10)
-                ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=11)
+                    ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
+                ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                 ax.grid(True, alpha=0.3, linestyle='--')
                 
                 # Spikes
                 ax = axes[i, 1]
                 ax.plot(time, hidden1_spikes[:, neuron_idx], color=PROF_COLORS['hidden1'], 
                        linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                ax.set_ylabel(f'Neuron {neuron_idx}\nSpikes', fontsize=10, fontweight='bold')
+                ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
                 if i == num_neurons_this_fig - 1:
-                    ax.set_xlabel('Time (seconds)', fontsize=10)
-                ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=11)
+                    ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
                 ax.set_ylim([-0.1, 1.1])
+                ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                 ax.grid(True, alpha=0.3, linestyle='--')
             
             plt.tight_layout()
+            _save_flow_figure(fig, f"signal_flow_hidden1_sample_{original_sample_idx}_fig_{fig_idx+1}.png")
             plt.show()
         
         # ========== FIGURE 3: HIDDEN LAYER 2 NEURONS (if exists) ==========
@@ -2256,24 +2280,27 @@ class SNN_BioMarker:
                     ax = axes[i, 0]
                     ax.plot(time, hidden2_mem[:, neuron_idx], color=PROF_COLORS['hidden2'], 
                            linewidth=1.5, alpha=0.8)
-                    ax.set_ylabel(f'Neuron {neuron_idx}\nMembrane Pot.', fontsize=10, fontweight='bold')
+                    ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=10)
-                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=11)
+                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
+                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                     ax.grid(True, alpha=0.3, linestyle='--')
                     
                     # Spikes
                     ax = axes[i, 1]
                     ax.plot(time, hidden2_spikes[:, neuron_idx], color=PROF_COLORS['hidden2'], 
                            linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                    ax.set_ylabel(f'Neuron {neuron_idx}\nSpikes', fontsize=10, fontweight='bold')
+                    ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=10)
-                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=11)
+                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
                     ax.set_ylim([-0.1, 1.1])
+                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                     ax.grid(True, alpha=0.3)
                 
                 plt.tight_layout()
+                _save_flow_figure(fig, f"signal_flow_hidden2_sample_{original_sample_idx}_fig_{fig_idx+1}.png")
                 plt.show()
         
         # ========== FIGURE 4: HIDDEN LAYER 3 NEURONS (if exists) ==========
@@ -2299,24 +2326,27 @@ class SNN_BioMarker:
                     ax = axes[i, 0]
                     ax.plot(time, hidden3_mem[:, neuron_idx], color=PROF_COLORS['hidden3'], 
                            linewidth=1.5, alpha=0.8)
-                    ax.set_ylabel(f'Neuron {neuron_idx}\nMembrane Pot.', fontsize=10, fontweight='bold')
+                    ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=10)
-                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=11)
+                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
+                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                     ax.grid(True, alpha=0.3, linestyle='--')
                     
                     # Spikes
                     ax = axes[i, 1]
                     ax.plot(time, hidden3_spikes[:, neuron_idx], color=PROF_COLORS['hidden3'], 
                            linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                    ax.set_ylabel(f'Neuron {neuron_idx}\nSpikes', fontsize=10, fontweight='bold')
+                    ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=10)
-                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=11)
+                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
                     ax.set_ylim([-0.1, 1.1])
+                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
                     ax.grid(True, alpha=0.3)
                 
                 plt.tight_layout()
+                _save_flow_figure(fig, f"signal_flow_hidden3_sample_{original_sample_idx}_fig_{fig_idx+1}.png")
                 plt.show()
         
         # ========== FIGURE 5: OUTPUT LAYER NEURONS (5 classes) ==========
@@ -2337,11 +2367,12 @@ class SNN_BioMarker:
                 ax.axhline(y=0, color=CLASS_COLORS[class_idx], linestyle='--', alpha=0.5, label='PREDICTED')
             if class_idx == sample_label_val:
                 ax.axhline(y=0, color='#2C2C2C', linestyle=':', alpha=0.5, label='TRUE LABEL')
-            ax.set_ylabel(f'{class_names[class_idx]}\nMembrane Pot.', fontsize=10, fontweight='bold')
+            ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
             if class_idx == 3:
-                ax.set_xlabel('Time (seconds)', fontsize=10)
-            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]}) - Membrane Potential', fontsize=11)
-            ax.legend(loc='upper right', fontsize=8, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+                ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
+            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]}) - Membrane Potential', fontsize=13, fontweight='bold')
+            ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+            ax.legend(loc='upper right', fontsize=10, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
             ax.grid(True, alpha=0.3, linestyle='--')
             
             # Spikes
@@ -2352,16 +2383,18 @@ class SNN_BioMarker:
                 ax.axhline(y=0.5, color=CLASS_COLORS[class_idx], linestyle='--', alpha=0.5, label='PREDICTED')
             if class_idx == sample_label_val:
                 ax.axhline(y=0.5, color='#2C2C2C', linestyle=':', alpha=0.5, label='TRUE LABEL')
-            ax.set_ylabel(f'{class_names[class_idx]}\nSpikes', fontsize=10, fontweight='bold')
+            ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
             if class_idx == 3:
-                ax.set_xlabel('Time (seconds)', fontsize=10)
+                ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
             ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]}) - Spike Output\n'
-                        f'Total: {spike_counts[class_idx]:.0f} spikes', fontsize=11)
+                        f'Total: {spike_counts[class_idx]:.0f} spikes', fontsize=13, fontweight='bold')
             ax.set_ylim([-0.1, 1.1])
-            ax.legend(loc='upper right', fontsize=8)
+            ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+            ax.legend(loc='upper right', fontsize=10, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
             ax.grid(True, alpha=0.3)
         
         plt.tight_layout()
+        _save_flow_figure(fig5, f"signal_flow_output_sample_{original_sample_idx}.png")
         plt.show()
         
         # Print summary
@@ -2486,7 +2519,7 @@ class SNN_BioMarker:
         print(f"Final test accuracy: {self.final_test_acc:.2f}%")
         print(f"{'='*60}")
 
-    def load_model(self, filepath):
+    def load_model(self, filepath, auto_prepare=True, generation_method='1', split_ratio=0.8, batch_size=None):
         """
         Load a saved model, optimizer state, training history, and metadata from a file.
         After loading, you can call visualization functions like:
@@ -2497,32 +2530,86 @@ class SNN_BioMarker:
         
         Args:
             filepath: Path to the saved model file (e.g., 'model.pth' or 'model.pt')
+            auto_prepare: If True, automatically prepare missing preprocessing/data loader steps.
+            generation_method: Synaptic signal generation method to use if signals are not prepared.
+            split_ratio: Train/test split ratio used if dataset split is not prepared.
+            batch_size: DataLoader batch size used if loaders are not prepared.
+                        If None, uses the value saved in checkpoint (fallback=32).
         """
-        if not self.create_data_loaders_complete:
-            raise ValueError("Data loaders must be created first. Please call create_data_loaders() before loading model.")
-        
-        if not self.split_dataset_complete:
-            raise ValueError("Dataset must be split first. Please call split_dataset() before loading model.")
-        
-        if not self.create_dataset_complete:
-            raise ValueError("Dataset must be created first. Please call create_dataset() before loading model.")
-        
-        if not self.convert_to_torch_tensor_complete:
-            raise ValueError("Data must be converted to torch tensors first. Please call convert_to_torch_tensor() before loading model.")
-        
-        if not self.labeling_y_complete:
-            raise ValueError("Labels must be labeled first. Please call labeling_y() before loading model.")
-        
-        if not self.generate_synaptic_signals_complete:
-            raise ValueError("Synaptic signals must be generated first. Please call generate_synaptic_signals() before loading model.")
-        
-        # Load the saved dictionary
+        # Load the saved dictionary first so we can use its metadata to auto-prepare.
         print(f"\n{'='*60}")
         print("LOADING MODEL")
         print(f"{'='*60}")
         print(f"Loading from: {filepath}")
         
         checkpoint = torch.load(filepath, map_location='cpu')
+        
+        # Data preprocessing metadata from checkpoint
+        saved_dt = checkpoint.get('dt', None)
+        saved_T = checkpoint.get('T', None)
+        saved_a = checkpoint.get('a', None)
+        saved_target_length = checkpoint.get('target_length', None)
+        saved_downsampled_signals = checkpoint.get('average_temporal_pooling_downsample_signal_complete', False)
+        saved_batch_size = checkpoint.get('batch_size', 32)
+        
+        if batch_size is None:
+            if saved_batch_size is None or saved_batch_size == 0:
+                batch_size = 32
+            else:
+                batch_size = saved_batch_size
+
+        if auto_prepare:
+            print("\nAuto-prepare mode: checking required preprocessing steps...")
+            
+            if not self.generate_synaptic_signals_complete:
+                dt_to_use = saved_dt if saved_dt is not None else 1e-3
+                T_to_use = saved_T if saved_T is not None else 20
+                a_to_use = saved_a if saved_a is not None else 0.9
+                print(f"  -> Running generate_synaptic_signals(dt={dt_to_use}, T={T_to_use}, a={a_to_use}, generation_method='{generation_method}')")
+                self.generate_synaptic_signals(dt=dt_to_use, T=T_to_use, a=a_to_use, generation_method=generation_method)
+            
+            if not self.labeling_y_complete:
+                print("  -> Running labeling_y()")
+                self.labeling_y()
+            
+            if saved_downsampled_signals and not self.average_temporal_pooling_downsample_signal_complete:
+                target_length_to_use = saved_target_length if saved_target_length not in (None, 0) else 25
+                print(f"  -> Running average_temporal_pooling_downsample_signal(target_length={target_length_to_use})")
+                self.average_temporal_pooling_downsample_signal(target_length=target_length_to_use)
+            
+            if not self.convert_to_torch_tensor_complete:
+                print(f"  -> Running convert_to_torch_tensor(downsampled_signals={saved_downsampled_signals})")
+                self.convert_to_torch_tensor(downsampled_signals=saved_downsampled_signals)
+            
+            if not self.create_dataset_complete:
+                print("  -> Running create_dataset()")
+                self.create_dataset()
+            
+            if not self.split_dataset_complete:
+                print(f"  -> Running split_dataset(split_ratio={split_ratio})")
+                self.split_dataset(split_ratio=split_ratio)
+            
+            if not self.create_data_loaders_complete:
+                print(f"  -> Running create_data_loaders(batch_size={batch_size})")
+                self.create_data_loaders(batch_size=batch_size)
+        else:
+            if not self.create_data_loaders_complete:
+                raise ValueError("Data loaders must be created first. Please call create_data_loaders() before loading model.")
+            
+            if not self.split_dataset_complete:
+                raise ValueError("Dataset must be split first. Please call split_dataset() before loading model.")
+            
+            if not self.create_dataset_complete:
+                raise ValueError("Dataset must be created first. Please call create_dataset() before loading model.")
+            
+            if not self.convert_to_torch_tensor_complete:
+                raise ValueError("Data must be converted to torch tensors first. Please call convert_to_torch_tensor() before loading model.")
+            
+            if not self.labeling_y_complete:
+                raise ValueError("Labels must be labeled first. Please call labeling_y() before loading model.")
+            
+            if not self.generate_synaptic_signals_complete:
+                raise ValueError("Synaptic signals must be generated first. Please call generate_synaptic_signals() before loading model.")
         
         # Extract network architecture parameters
         num_layers = checkpoint['num_layers']
@@ -2575,11 +2662,6 @@ class SNN_BioMarker:
         self.final_evaluation_complete = checkpoint.get('final_evaluation_complete', True)
         
         # Verify data preprocessing parameters match
-        saved_dt = checkpoint.get('dt', None)
-        saved_T = checkpoint.get('T', None)
-        saved_a = checkpoint.get('a', None)
-        saved_target_length = checkpoint.get('target_length', None)
-        
         if saved_dt is not None and saved_dt != self.dt:
             print(f"Warning: dt mismatch. Saved: {saved_dt}, Current: {self.dt}")
         if saved_T is not None and saved_T != self.T:
