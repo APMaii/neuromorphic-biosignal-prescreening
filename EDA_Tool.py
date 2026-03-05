@@ -34,6 +34,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import os
 
 
 
@@ -52,9 +53,9 @@ mpl.rcParams['savefig.dpi'] = 600
 mpl.rcParams['font.size'] = 10
 mpl.rcParams['axes.labelsize'] = 11
 mpl.rcParams['axes.titlesize'] = 12
-mpl.rcParams['xtick.labelsize'] = 9
-mpl.rcParams['ytick.labelsize'] = 9
-mpl.rcParams['legend.fontsize'] = 9
+mpl.rcParams['xtick.labelsize'] = 16
+mpl.rcParams['ytick.labelsize'] = 16
+mpl.rcParams['legend.fontsize'] = 14
 mpl.rcParams['figure.titlesize'] = 14
 
 
@@ -85,7 +86,18 @@ REF_LINE_COLORS = {
 
 # Ask the user to enter the path to the CSV file
 path =input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv):')
+
+
 df = pd.read_csv(path)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) if '__file__' in globals() else os.getcwd()
+FIGURE_OUTPUT_DIR = os.path.join(BASE_DIR, "EDA_Figures")
+os.makedirs(FIGURE_OUTPUT_DIR, exist_ok=True)
+
+def save_and_report(filename):
+    output_path = os.path.join(FIGURE_OUTPUT_DIR, filename)
+    plt.savefig(output_path, bbox_inches='tight')
+    print(f"Figure saved: {output_path}")
 
 
 
@@ -118,13 +130,14 @@ plt.xlabel("Free PSA (nM)", fontsize=26, fontweight='bold', labelpad=15)
 plt.ylabel("Total PSA (nM)", fontsize=26, fontweight='bold', labelpad=15)
 
 #plt.title("Free PSA vs Total PSA Concentration Space", fontweight='bold', pad=15)
-plt.tick_params(axis='both', which='major',  labelsize=14,width=1.5, length=6)
+plt.tick_params(axis='both', which='major',  labelsize=16,width=1.5, length=6)
 
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.xlim(0,1)
 plt.ylim(0,1)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
+save_and_report("01_concentration_space_zoomed.png")
 plt.show()
 
 
@@ -159,6 +172,7 @@ plt.xlim(0,8)
 plt.ylim(0,8)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
+save_and_report("02_concentration_space_full_range.png")
 plt.show()
 
 
@@ -192,6 +206,7 @@ plt.ylabel("Total PSA Frequency (Hz)", fontweight='medium')
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
+save_and_report("03_frequency_space.png")
 plt.show()
 
 
@@ -214,6 +229,7 @@ plt.title("PSA Concentration Distribution", fontweight='bold', pad=15)
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--', axis='y')
 plt.tight_layout()
+save_and_report("04_histogram_concentration.png")
 plt.show()
 
 plt.figure(figsize=(10, 6))
@@ -227,6 +243,7 @@ plt.title("PSA Frequency Distribution", fontweight='bold', pad=15)
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--', axis='y')
 plt.tight_layout()
+save_and_report("05_histogram_frequency.png")
 plt.show()
 
 plt.figure(figsize=(10, 6))
@@ -244,6 +261,7 @@ plt.axvline(25, color=REF_LINE_COLORS[25], linestyle='--', linewidth=2,
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--', axis='y')
 plt.tight_layout()
+save_and_report("06_histogram_ratio.png")
 plt.show()
 
 
@@ -282,6 +300,7 @@ plt.title("Log–Log Relationship: Free and Total PSA", fontweight='bold', pad=1
 plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()
+save_and_report("07_loglog_validation.png")
 plt.show()
 
 
@@ -316,7 +335,7 @@ ax1.set_xlabel('Risk Level', fontweight='bold',fontsize=18)
 ax1.set_ylabel('Number of Samples', fontweight='bold',fontsize=18)
 ax1.set_title('Sample Count by Risk Level', fontweight='bold')
 #ax1.tick_params(axis='x', rotation=45)
-ax1.tick_params(axis='both', which='major',  labelsize=14 , width=1.5, length=6)
+ax1.tick_params(axis='both', which='major',  labelsize=16 , width=1.5, length=6)
 # Add value labels on bars
 for bar in bars:
     height = bar.get_height()
@@ -354,9 +373,9 @@ ax2.set_xlabel('Risk Level', fontweight='bold', fontsize=18, labelpad=15)
 ax2.set_ylabel('Free/Total PSA Ratio (%)', fontweight='bold',fontsize=18, labelpad=15)
 ax2.set_title('Ratio Distribution by Risk Level', fontweight='bold', pad=10)
 #ax2.tick_params(axis='x', rotation=0)
-ax2.tick_params(axis='both', which='major',  labelsize=14 , width=1.5, length=6)
+ax2.tick_params(axis='both', which='major',  labelsize=16 , width=1.5, length=6)
 
-ax2.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=8)
+ax2.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
 ax2.grid(axis='y', alpha=0.3, linestyle='--')
 
 
@@ -408,4 +427,46 @@ ax4.tick_params(axis='x', rotation=45)
 ax4.grid(axis='y', alpha=0.3, linestyle='--')
 
 plt.tight_layout(rect=[0, 0, 1, 0.99])
+save_and_report("08_risk_level_distribution_2x2.png")
+plt.show()
+
+
+# =========================
+# 6. Standalone Figure: Ratio Distribution by Risk Level
+# =========================
+fig_ratio, ax_ratio = plt.subplots(figsize=(9, 6))
+bp_ratio = ax_ratio.boxplot(
+    ratio_data,
+    labels=risk_levels1,
+    patch_artist=True,
+    widths=0.6,
+    showmeans=True,
+    meanline=True
+)
+
+for patch, color in zip(bp_ratio['boxes'], risk_color_list):
+    patch.set_facecolor(color)
+    patch.set_alpha(0.85)
+    patch.set_edgecolor('#2C2C2C')
+    patch.set_linewidth(1.2)
+
+for element in ['whiskers', 'caps']:
+    plt.setp(bp_ratio[element], color='#2C2C2C', linewidth=1.2)
+
+plt.setp(bp_ratio['medians'], color='#FFFFFF', linewidth=2)
+plt.setp(bp_ratio['means'], color='#F5F5F5', linewidth=1.5, linestyle='--')
+plt.setp(bp_ratio['fliers'], color='#2C2C2C', marker='o', markersize=4, alpha=0.6)
+
+ax_ratio.axhline(10, color=REF_LINE_COLORS[10], linestyle='--', linewidth=2, alpha=0.6, label='10% boundary')
+ax_ratio.axhline(15, color=REF_LINE_COLORS[15], linestyle='--', linewidth=2, alpha=0.6, label='15% boundary')
+ax_ratio.axhline(25, color=REF_LINE_COLORS[25], linestyle='--', linewidth=2, alpha=0.6, label='25% boundary')
+ax_ratio.set_xlabel('Risk Level', fontweight='bold', fontsize=18, labelpad=15)
+ax_ratio.set_ylabel('Free/Total PSA Ratio (%)', fontweight='bold', fontsize=18, labelpad=15)
+ax_ratio.set_title('Ratio Distribution by Risk Level (Standalone)', fontweight='bold', pad=10)
+ax_ratio.tick_params(axis='both', which='major', labelsize=16, width=1.5, length=6)
+ax_ratio.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
+ax_ratio.grid(axis='y', alpha=0.3, linestyle='--')
+
+fig_ratio.tight_layout()
+save_and_report("09_ratio_distribution_standalone.png")
 plt.show()
