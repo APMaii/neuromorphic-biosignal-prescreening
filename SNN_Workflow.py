@@ -117,6 +117,7 @@ SNN_BioMarker_load_model = SNN_BioMarker(data_path,dpi=600)
 model_path = input('Enter the path to the model (.pth): ')
 
 
+
 SNN_BioMarker_load_model.load_model(model_path,auto_prepare=True,generation_method='5',split_ratio=0.8,batch_size=8)
 
 
