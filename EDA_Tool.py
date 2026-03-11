@@ -87,7 +87,6 @@ REF_LINE_COLORS = {
 # Ask the user to enter the path to the CSV file
 path =input('Enter the path to the CSV file (Free_Total_PSA_frequency.csv):')
 
-
 df = pd.read_csv(path)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) if '__file__' in globals() else os.getcwd()
@@ -126,13 +125,13 @@ plt.plot(x_line, x_line / 0.15, color=REF_LINE_COLORS[15], linestyle='--',
 plt.plot(x_line, x_line / 0.25, color=REF_LINE_COLORS[25], linestyle='--', 
          alpha=0.4, linewidth=1.5, label='25% ratio')
 
-plt.xlabel("Free PSA (nM)", fontsize=26, fontweight='bold', labelpad=15)
-plt.ylabel("Total PSA (nM)", fontsize=26, fontweight='bold', labelpad=15)
+plt.xlabel("Free PSA (nM)", fontsize=30, fontweight='bold', labelpad=15)
+plt.ylabel("Total PSA (nM)", fontsize=30, fontweight='bold', labelpad=15)
 
 #plt.title("Free PSA vs Total PSA Concentration Space", fontweight='bold', pad=15)
-plt.tick_params(axis='both', which='major',  labelsize=16,width=1.5, length=6)
+plt.tick_params(axis='both', which='major',  labelsize=20,width=1.5, length=6)
 
-plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=16)
 plt.xlim(0,1)
 plt.ylim(0,1)
 plt.grid(True, alpha=0.3, linestyle='--')
@@ -164,10 +163,11 @@ plt.plot(x_line, x_line / 0.15, color=REF_LINE_COLORS[15], linestyle='--',
 plt.plot(x_line, x_line / 0.25, color=REF_LINE_COLORS[25], linestyle='--', 
          alpha=0.4, linewidth=1.5, label='25% ratio')
 
-plt.xlabel("Free PSA (nM)", fontweight='medium')
-plt.ylabel("Total PSA (nM)", fontweight='medium')
+plt.xlabel("Free PSA (nM)", fontweight='medium', fontsize=24)
+plt.ylabel("Total PSA (nM)", fontweight='medium', fontsize=24)
 #plt.title("Free PSA vs Total PSA Concentration Space", fontweight='bold', pad=15)
-plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+plt.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=16)
+plt.tick_params(axis='both', which='major', labelsize=18, width=1.5, length=6)
 plt.xlim(0,8)
 plt.ylim(0,8)
 plt.grid(True, alpha=0.3, linestyle='--')
@@ -434,6 +434,11 @@ plt.show()
 # =========================
 # 6. Standalone Figure: Ratio Distribution by Risk Level
 # =========================
+risk_levels = ["High Risk", "Moderately High Risk", "Intermediate", "Low Risk"]
+risk_levels1 = ["High", "Moderately High", "Intermediate", "Low "]
+
+ratio_data = [df[df["Risk_Level"] == level]["Free_Total_Ratio_Percent"].values for level in risk_levels]
+
 fig_ratio, ax_ratio = plt.subplots(figsize=(9, 6))
 bp_ratio = ax_ratio.boxplot(
     ratio_data,
@@ -460,11 +465,11 @@ plt.setp(bp_ratio['fliers'], color='#2C2C2C', marker='o', markersize=4, alpha=0.
 ax_ratio.axhline(10, color=REF_LINE_COLORS[10], linestyle='--', linewidth=2, alpha=0.6, label='10% boundary')
 ax_ratio.axhline(15, color=REF_LINE_COLORS[15], linestyle='--', linewidth=2, alpha=0.6, label='15% boundary')
 ax_ratio.axhline(25, color=REF_LINE_COLORS[25], linestyle='--', linewidth=2, alpha=0.6, label='25% boundary')
-ax_ratio.set_xlabel('Risk Level', fontweight='bold', fontsize=18, labelpad=15)
-ax_ratio.set_ylabel('Free/Total PSA Ratio (%)', fontweight='bold', fontsize=18, labelpad=15)
+ax_ratio.set_xlabel('Risk Level', fontweight='bold', fontsize=22, labelpad=15)
+ax_ratio.set_ylabel('Free/Total PSA Ratio (%)', fontweight='bold', fontsize=22, labelpad=15)
 ax_ratio.set_title('Ratio Distribution by Risk Level (Standalone)', fontweight='bold', pad=10)
-ax_ratio.tick_params(axis='both', which='major', labelsize=16, width=1.5, length=6)
-ax_ratio.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
+ax_ratio.tick_params(axis='both', which='major', labelsize=19, width=1.5, length=6)
+ax_ratio.legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=16)
 ax_ratio.grid(axis='y', alpha=0.3, linestyle='--')
 
 fig_ratio.tight_layout()
