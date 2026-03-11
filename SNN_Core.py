@@ -1514,11 +1514,11 @@ class SNN_BioMarker:
                     color=PROF_COLORS['train'], alpha=0.8)
         axes[0].plot(self.test_loss_hist, label='Test Loss', linewidth=2, 
                     color=PROF_COLORS['test'], alpha=0.8)
-        axes[0].set_xlabel('Epoch', fontsize=18, fontweight='bold')
-        axes[0].set_ylabel('Loss', fontsize=18, fontweight='bold')
-        axes[0].set_title('Training and Test Loss', fontsize=20, fontweight='bold')
-        axes[0].tick_params(axis='both', which='major', labelsize=15, width=1.5, length=6)
-        axes[0].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
+        axes[0].set_xlabel('Epoch', fontsize=22, fontweight='bold', labelpad=10)
+        axes[0].set_ylabel('Loss', fontsize=22, fontweight='bold', labelpad=10)
+        axes[0].set_title('Training and Test Loss', fontsize=24, fontweight='bold', pad=12)
+        axes[0].tick_params(axis='both', which='major', labelsize=18, width=1.5, length=6)
+        axes[0].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=17)
         axes[0].grid(True, alpha=0.3, linestyle='--')
 
         # Plot accuracy curves
@@ -1532,11 +1532,11 @@ class SNN_BioMarker:
         axes[1].plot(epochs_recorded[:len(self.test_acc_hist)], self.test_acc_hist, 
                     marker='s', label='Test Accuracy', linewidth=2, 
                     color=PROF_COLORS['test'], alpha=0.8, markersize=5)
-        axes[1].set_xlabel('Epoch', fontsize=18, fontweight='bold')
-        axes[1].set_ylabel('Accuracy (%)', fontsize=18, fontweight='bold')
-        axes[1].set_title('Training and Test Accuracy', fontsize=20, fontweight='bold')
-        axes[1].tick_params(axis='both', which='major', labelsize=15, width=1.5, length=6)
-        axes[1].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=14)
+        axes[1].set_xlabel('Epoch', fontsize=22, fontweight='bold', labelpad=10)
+        axes[1].set_ylabel('Accuracy (%)', fontsize=22, fontweight='bold', labelpad=10)
+        axes[1].set_title('Training and Test Accuracy', fontsize=24, fontweight='bold', pad=12)
+        axes[1].tick_params(axis='both', which='major', labelsize=18, width=1.5, length=6)
+        axes[1].legend(frameon=True, fancybox=True, shadow=True, framealpha=0.9, fontsize=17)
         axes[1].grid(True, alpha=0.3, linestyle='--')
 
         plt.tight_layout()
@@ -1598,8 +1598,8 @@ class SNN_BioMarker:
                     xticklabels=class_names, yticklabels=class_names,annot_kws={"size": 18, "weight": "bold"},
                     ax=axes[0], cbar_kws={'label': 'Count'}, 
                     linewidths=0.5, linecolor='white')
-        axes[0].set_xlabel('Predicted Label', fontsize=16, fontweight='bold')
-        axes[0].set_ylabel('True Label', fontsize=14, fontweight='bold')
+        axes[0].set_xlabel('Predicted Label', fontsize=20, fontweight='bold', labelpad=14)
+        axes[0].set_ylabel('True Label', fontsize=18, fontweight='bold', labelpad=14)
         axes[0].set_title(f'Train Set Confusion Matrix\nAccuracy: {self.final_train_acc:.2f}%', 
                         fontsize=17, fontweight='bold')
         axes[0].tick_params(axis='both', labelsize=13)
@@ -1611,8 +1611,8 @@ class SNN_BioMarker:
                     xticklabels=class_names, yticklabels=class_names,annot_kws={"size": 18, "weight": "bold"},
                     ax=axes[1], cbar_kws={'label': 'Count'}, 
                     linewidths=0.5, linecolor='white')
-        axes[1].set_xlabel('Predicted Label', fontsize=16, fontweight='bold')
-        axes[1].set_ylabel('True Label', fontsize=14, fontweight='bold')
+        axes[1].set_xlabel('Predicted Label', fontsize=20, fontweight='bold', labelpad=14)
+        axes[1].set_ylabel('True Label', fontsize=18, fontweight='bold', labelpad=14)
         axes[1].set_title(f'Test Set Confusion Matrix\nAccuracy: {self.final_test_acc:.2f}%', 
                         fontsize=17, fontweight='bold')
         axes[1].tick_params(axis='both', labelsize=13)
@@ -2234,23 +2234,23 @@ class SNN_BioMarker:
                 ax = axes[i, 0]
                 ax.plot(time, hidden1_mem[:, neuron_idx], color=PROF_COLORS['hidden1'], 
                        linewidth=1.5, alpha=0.8)
-                ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
+                ax.set_ylabel('Membrane Potential', fontsize=15, fontweight='bold')
                 if i == num_neurons_this_fig - 1:
-                    ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
-                ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                    ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
+                ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                 ax.grid(True, alpha=0.3, linestyle='--')
                 
                 # Spikes
                 ax = axes[i, 1]
                 ax.plot(time, hidden1_spikes[:, neuron_idx], color=PROF_COLORS['hidden1'], 
                        linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
+                ax.set_ylabel('Spikes', fontsize=15, fontweight='bold')
                 if i == num_neurons_this_fig - 1:
-                    ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
+                    ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
                 ax.set_ylim([-0.1, 1.1])
-                ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                 ax.grid(True, alpha=0.3, linestyle='--')
             
             plt.tight_layout()
@@ -2280,23 +2280,23 @@ class SNN_BioMarker:
                     ax = axes[i, 0]
                     ax.plot(time, hidden2_mem[:, neuron_idx], color=PROF_COLORS['hidden2'], 
                            linewidth=1.5, alpha=0.8)
-                    ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
+                    ax.set_ylabel('Membrane Potential', fontsize=15, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
-                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                        ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
+                    ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                     ax.grid(True, alpha=0.3, linestyle='--')
                     
                     # Spikes
                     ax = axes[i, 1]
                     ax.plot(time, hidden2_spikes[:, neuron_idx], color=PROF_COLORS['hidden2'], 
                            linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                    ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
+                    ax.set_ylabel('Spikes', fontsize=15, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
+                        ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
                     ax.set_ylim([-0.1, 1.1])
-                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                    ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                     ax.grid(True, alpha=0.3)
                 
                 plt.tight_layout()
@@ -2326,23 +2326,23 @@ class SNN_BioMarker:
                     ax = axes[i, 0]
                     ax.plot(time, hidden3_mem[:, neuron_idx], color=PROF_COLORS['hidden3'], 
                            linewidth=1.5, alpha=0.8)
-                    ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
+                    ax.set_ylabel('Membrane Potential', fontsize=15, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                    ax.set_title(f'Neuron {neuron_idx} - Membrane Potential', fontsize=13, fontweight='bold')
-                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                        ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
+                    ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                     ax.grid(True, alpha=0.3, linestyle='--')
                     
                     # Spikes
                     ax = axes[i, 1]
                     ax.plot(time, hidden3_spikes[:, neuron_idx], color=PROF_COLORS['hidden3'], 
                            linewidth=1.5, alpha=0.8, marker='o', markersize=3)
-                    ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
+                    ax.set_ylabel('Spikes', fontsize=15, fontweight='bold')
                     if i == num_neurons_this_fig - 1:
-                        ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-                    ax.set_title(f'Neuron {neuron_idx} - Spike Output', fontsize=13, fontweight='bold')
+                        ax.set_xlabel('Time (seconds)', fontsize=15, fontweight='bold')
+                    ax.set_title(f'Neuron {neuron_idx}', fontsize=16, fontweight='bold')
                     ax.set_ylim([-0.1, 1.1])
-                    ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
+                    ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
                     ax.grid(True, alpha=0.3)
                 
                 plt.tight_layout()
@@ -2367,12 +2367,12 @@ class SNN_BioMarker:
                 ax.axhline(y=0, color=CLASS_COLORS[class_idx], linestyle='--', alpha=0.5, label='PREDICTED')
             if class_idx == sample_label_val:
                 ax.axhline(y=0, color='#2C2C2C', linestyle=':', alpha=0.5, label='TRUE LABEL')
-            ax.set_ylabel('Membrane Potential', fontsize=12, fontweight='bold')
+            ax.set_ylabel('Membrane Potential', fontsize=16, fontweight='bold')
             if class_idx == 3:
-                ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]}) - Membrane Potential', fontsize=13, fontweight='bold')
-            ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
-            ax.legend(loc='upper right', fontsize=10, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+                ax.set_xlabel('Time (seconds)', fontsize=16, fontweight='bold')
+            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]})', fontsize=17, fontweight='bold')
+            ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
+            ax.legend(loc='upper right', fontsize=13, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
             ax.grid(True, alpha=0.3, linestyle='--')
             
             # Spikes
@@ -2383,14 +2383,14 @@ class SNN_BioMarker:
                 ax.axhline(y=0.5, color=CLASS_COLORS[class_idx], linestyle='--', alpha=0.5, label='PREDICTED')
             if class_idx == sample_label_val:
                 ax.axhline(y=0.5, color='#2C2C2C', linestyle=':', alpha=0.5, label='TRUE LABEL')
-            ax.set_ylabel('Spikes', fontsize=12, fontweight='bold')
+            ax.set_ylabel('Spikes', fontsize=16, fontweight='bold')
             if class_idx == 3:
-                ax.set_xlabel('Time (seconds)', fontsize=12, fontweight='bold')
-            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]}) - Spike Output\n'
-                        f'Total: {spike_counts[class_idx]:.0f} spikes', fontsize=13, fontweight='bold')
+                ax.set_xlabel('Time (seconds)', fontsize=16, fontweight='bold')
+            ax.set_title(f'Output Neuron {class_idx} ({class_names[class_idx]})\n'
+                        f'Total: {spike_counts[class_idx]:.0f} spikes', fontsize=17, fontweight='bold')
             ax.set_ylim([-0.1, 1.1])
-            ax.tick_params(axis='both', which='major', labelsize=13, width=1.2, length=4)
-            ax.legend(loc='upper right', fontsize=10, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
+            ax.tick_params(axis='both', which='major', labelsize=15, width=1.2, length=4)
+            ax.legend(loc='upper right', fontsize=13, frameon=True, fancybox=True, shadow=True, framealpha=0.9)
             ax.grid(True, alpha=0.3)
         
         plt.tight_layout()
