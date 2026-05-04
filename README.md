@@ -336,7 +336,13 @@ Copyright (c) 2026 Ali Pilehvar Meibody
 
 If you use this code in your research, please cite the associated publication:
 ```bibtex
-Not Published Yet
+@article{chen2026neuromorphic,
+  title={A Neuromorphic Front-End based on Memristive Biosensors for Risk Pre-Screening by Pulse-Encoded Signals},
+  author={Chen, Junrui and Meibody, Ali Pilehvar and Carrara, Sandro},
+  journal={IEEE Sensors Journal},
+  year={2026},
+  publisher={IEEE}
+}
 ```
 
 ## Contact
